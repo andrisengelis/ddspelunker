@@ -16,6 +16,10 @@ namespace ddSpelunker.Cmd
 
 			IDiskDrive diskDrive = new FileSystemDrive(rootPath);
 
+			Spelunker ddSpelunker = new Spelunker(diskDrive);
+
+
+
 			List<string> files = new List<string>();
 			
 			files.AddRange(AllFilesInDrive(rootPath));
