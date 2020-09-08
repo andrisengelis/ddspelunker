@@ -11,12 +11,13 @@ namespace ddSpelunker.Cmd
 			Console.WriteLine("ddSpelunker started.");
 
 			var rootDirectory = @"D:\";
+			var outputfileName = @"D:\content.txt";
 
 			List<string> files = new List<string>();
 
 			files.AddRange(AllFilesInDrive(rootDirectory));
 
-			File.WriteAllLines(@"D:\content.txt", files);
+			File.WriteAllLines(outputfileName, files);
 
 			Console.WriteLine("ddSpelunker ended.");
 		}
