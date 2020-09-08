@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using ddSpelunker.Domain;
 
 namespace ddSpelunker.Cmd
 {
@@ -16,7 +17,7 @@ namespace ddSpelunker.Cmd
 			IDiskDrive diskDrive = new FileSystemDrive(rootPath);
 
 			List<string> files = new List<string>();
-
+			
 			files.AddRange(AllFilesInDrive(rootDirectory));
 			
 			File.WriteAllLines(outputFileName, files);

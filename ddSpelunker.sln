@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ddSpelunker.Tests", "ddSpel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ddSpelunker.Cmd", "ddSpelunker.Cmd\ddSpelunker.Cmd.csproj", "{39D56BDF-809F-4C86-B41C-6F2E9BD2AE89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ddSpelunker.Domain", "ddSpelunker.Domain\ddSpelunker.Domain.csproj", "{DBF92530-EA4A-4F73-BA6F-E3DD267B4F5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{39D56BDF-809F-4C86-B41C-6F2E9BD2AE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D56BDF-809F-4C86-B41C-6F2E9BD2AE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D56BDF-809F-4C86-B41C-6F2E9BD2AE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBF92530-EA4A-4F73-BA6F-E3DD267B4F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBF92530-EA4A-4F73-BA6F-E3DD267B4F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBF92530-EA4A-4F73-BA6F-E3DD267B4F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBF92530-EA4A-4F73-BA6F-E3DD267B4F5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
