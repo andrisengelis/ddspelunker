@@ -18,7 +18,7 @@ namespace ddSpelunker.Cmd
 
 			List<string> files = new List<string>();
 			
-			files.AddRange(AllFilesInDrive(rootDirectory));
+			files.AddRange(AllFilesInDrive(rootPath));
 			
 			File.WriteAllLines(outputFileName, files);
 
