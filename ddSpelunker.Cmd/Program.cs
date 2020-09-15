@@ -20,7 +20,14 @@ namespace ddSpelunker.Cmd
 
             ddSpelunker.SpelunkDd();
 
-            File.WriteAllLines(outputFileName, ddSpelunker.Files);
+            var outputContent = new List<string>();
+            foreach (var nugget in ddSpelunker.Nuggets)
+            {
+                var nuggetString = $"{nugget.Name}\t{nugget.Path}";
+                outputContent.Add(nuggetString);
+            }
+            
+            File.WriteAllLines(outputFileName, outputContent);
 
             Console.WriteLine("ddSpelunker ended.");
         }

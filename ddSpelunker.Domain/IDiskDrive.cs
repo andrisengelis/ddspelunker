@@ -7,6 +7,6 @@ namespace ddSpelunker.Domain
 	{
 		string RootPath { get; set; }
 
-		IEnumerable<String> Spelunk();
+		IEnumerable<Nugget> Spelunk();
 	}
 }

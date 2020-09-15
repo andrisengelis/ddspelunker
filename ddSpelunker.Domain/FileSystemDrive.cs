@@ -13,9 +13,24 @@ namespace ddSpelunker.Domain
 			RootPath = rootPath;
 		}
 		
-		public IEnumerable<String> Spelunk()
+		public IEnumerable<Nugget> Spelunk()
 		{
-			return GetAllFiles(RootPath);
+			var filesInRootPath = GetAllFiles(RootPath);
+			
+			List<Nugget> allFiles = new List<Nugget>();
+
+			foreach (var filePath in filesInRootPath)
+			{
+				var fileName = Path.GetFileName(filePath);
+				var nugget = new Nugget()
+				{
+					Name = fileName,
+					Path = filePath
+				};
+				allFiles.Add(nugget);
+			}
+			
+			return allFiles;
 		}
 
 		private IEnumerable<String> GetAllFiles(string directoryPath)

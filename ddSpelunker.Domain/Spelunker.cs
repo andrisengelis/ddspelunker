@@ -6,7 +6,7 @@ namespace ddSpelunker.Domain
 	public class Spelunker
 	{
 		private readonly IDiskDrive _diskDrive;
-		public IEnumerable<String> Files { get; set; }
+		public IEnumerable<Nugget> Nuggets { get; set; }
 		
 		public Spelunker(IDiskDrive diskDrive)
 		{
@@ -15,7 +15,7 @@ namespace ddSpelunker.Domain
 
 		public void SpelunkDd()
 		{
-			Files = _diskDrive.Spelunk();
+			Nuggets = _diskDrive.Spelunk();
 		}
 	}
 }

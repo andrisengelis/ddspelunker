@@ -6,7 +6,7 @@ namespace ddSpelunker.Domain
 	public class MockDrive : IDiskDrive
 	{
 		public string RootPath { get; set; }
-		public IEnumerable<String> Spelunk()
+		public IEnumerable<Nugget> Spelunk()
 		{
 			throw new NotImplementedException();
 		}
