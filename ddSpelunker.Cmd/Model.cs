@@ -9,7 +9,7 @@ namespace ddSpelunker.Cmd
         public DbSet<NuggetFile> Files { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-            options.UseSqlite("Data Source = nuggets.db");
+            options.UseSqlite(@"Data Source = U:\nuggets.db");
     }
 
     public class DiskDrive

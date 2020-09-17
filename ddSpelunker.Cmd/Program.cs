@@ -13,7 +13,7 @@ namespace ddSpelunker.Cmd
             Console.WriteLine("ddSpelunker started.");
 
             var rootPath = @"D:\";
-            var outputFileName = @"D:\content.txt";
+            var outputFileName = @"U:\content.txt";
             var diskTitle = "Movies0001";
 
             IDiskDrive diskDrive = new FileSystemDrive(rootPath);
@@ -31,22 +31,29 @@ namespace ddSpelunker.Cmd
 
             using (var db = new SpelunkerContext())
             {
-                db.Add(new DiskDrive {Title = diskTitle});
-                db.SaveChanges();
-
-                var disk = db.DiskDrives.First(dd => dd.Title == diskTitle);
-
-                foreach (var nugget in ddSpelunker.Nuggets)
+                if (!db.DiskDrives.Any(dd => dd.Title == diskTitle))
                 {
-                    disk.Files.Add(
-                        new NuggetFile()
-                        {
-                            Title = nugget.Name,
-                            Path = nugget.Path
-                        });
-                }
+                    db.Add(new DiskDrive {Title = diskTitle});
+                    db.SaveChanges();
 
-                db.SaveChanges();
+                    var disk = db.DiskDrives.First(dd => dd.Title == diskTitle);
+
+                    foreach (var nugget in ddSpelunker.Nuggets)
+                    {
+                        disk.Files.Add(
+                            new NuggetFile()
+                            {
+                                Title = nugget.Name,
+                                Path = nugget.Path
+                            });
+                    }
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("Disk already exists in DB");
+                }
             }
             
             File.WriteAllLines(outputFileName, outputContent);
