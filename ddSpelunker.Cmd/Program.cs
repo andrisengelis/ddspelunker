@@ -10,11 +10,15 @@ namespace ddSpelunker.Cmd
     {
         static void Main(string[] args)
         {
+            var operation = args[0];
+            var title = args[1];
+            var path = args[2];
+            
             Console.WriteLine("ddSpelunker started.");
 
-            var rootPath = @"D:\";
+            var rootPath = path;
             var outputFileName = @"U:\content.txt";
-            var diskTitle = "Movies0001";
+            var diskTitle = title;
 
             IDiskDrive diskDrive = new FileSystemDrive(rootPath);
 
