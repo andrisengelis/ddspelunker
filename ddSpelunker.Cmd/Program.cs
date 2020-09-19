@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using ddSpelunker.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace ddSpelunker.Cmd
 {
@@ -16,7 +14,6 @@ namespace ddSpelunker.Cmd
             var path = args[2];
             
             var rootPath = path;
-            var outputFileName = @"U:\content.txt";
             var diskTitle = title;
             
             Console.WriteLine("ddSpelunker started.");
@@ -24,6 +21,7 @@ namespace ddSpelunker.Cmd
             switch (operation)
             {
                 case "add":
+                    AddToDb(diskTitle, rootPath);
                     break;
                 case "delete":
                     DeleteDdFromDb(diskTitle);
@@ -34,19 +32,16 @@ namespace ddSpelunker.Cmd
                     break;
             }
             
-            
+            Console.WriteLine("ddSpelunker ended.");
+        }
+
+        private static void AddToDb(string diskTitle, string rootPath)
+        {
             IDiskDrive diskDrive = new FileSystemDrive(rootPath);
 
             Spelunker ddSpelunker = new Spelunker(diskDrive);
 
             ddSpelunker.SpelunkDd();
-
-            var outputContent = new List<string>();
-            foreach (var nugget in ddSpelunker.Nuggets)
-            {
-                var nuggetString = $"{nugget.Name}\t{nugget.Path}";
-                outputContent.Add(nuggetString);
-            }
 
             using (var db = new SpelunkerContext())
             {
@@ -74,15 +69,27 @@ namespace ddSpelunker.Cmd
                     Console.WriteLine("Disk already exists in DB");
                 }
             }
-            
-            File.WriteAllLines(outputFileName, outputContent);
 
-            Console.WriteLine("ddSpelunker ended.");
         }
 
         private static void DeleteDdFromDb(string diskTitle)
         {
-            throw new NotImplementedException();
+            using (var db = new SpelunkerContext())
+            {
+                var disk = db.DiskDrives.FirstOrDefault(dd => dd.Title == diskTitle);
+
+                if (disk != null)
+                {
+                    disk.Files.RemoveAll(f => f.DiskDriveId == disk.DiskDriveId);
+                    db.DiskDrives.Remove(disk);
+                }
+                else
+                {
+                    Console.WriteLine("No disk found in db.");
+                }
+
+                db.SaveChanges();
+            }
         }
     }
 }
