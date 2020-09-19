@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ddSpelunker.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace ddSpelunker.Cmd
 {
@@ -14,12 +15,26 @@ namespace ddSpelunker.Cmd
             var title = args[1];
             var path = args[2];
             
-            Console.WriteLine("ddSpelunker started.");
-
             var rootPath = path;
             var outputFileName = @"U:\content.txt";
             var diskTitle = title;
+            
+            Console.WriteLine("ddSpelunker started.");
 
+            switch (operation)
+            {
+                case "add":
+                    break;
+                case "delete":
+                    DeleteDdFromDb(diskTitle);
+                    break;
+                case "update":
+                    break;
+                default:
+                    break;
+            }
+            
+            
             IDiskDrive diskDrive = new FileSystemDrive(rootPath);
 
             Spelunker ddSpelunker = new Spelunker(diskDrive);
@@ -63,6 +78,11 @@ namespace ddSpelunker.Cmd
             File.WriteAllLines(outputFileName, outputContent);
 
             Console.WriteLine("ddSpelunker ended.");
+        }
+
+        private static void DeleteDdFromDb(string diskTitle)
+        {
+            throw new NotImplementedException();
         }
     }
 }
