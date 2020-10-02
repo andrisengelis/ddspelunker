@@ -22,7 +22,7 @@ namespace ddSpelunker.Domain
 			foreach (var filePath in filesInRootPath)
 			{
 				var fileName = Path.GetFileName(filePath);
-				var nugget = new Nugget()
+				var nugget = new Nugget
 				{
 					Name = fileName,
 					Path = filePath
@@ -39,6 +39,9 @@ namespace ddSpelunker.Domain
 
 			foreach (var directory in Directory.EnumerateDirectories(directoryPath))
 			{
+				var fileAttributes = File.GetAttributes(directory);
+				if ((fileAttributes & FileAttributes.System) == FileAttributes.System)
+					continue;
 				filesInDirectory.AddRange(GetAllFiles(directory));
 			}
 
